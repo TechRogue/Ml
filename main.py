@@ -11,3 +11,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as pit 
 import seaborn as sns 
 
+data = pd.read_csv("tested.csv")
+data.info()
+print(data.isnull().sum())
+
