@@ -17,3 +17,6 @@ print(data.isnull().sum())
 
 def preprocess_data(df):
     df.drop(columns=["PassengerId", "Name", "Ticket", "Cabin"], inplace=True)
+    df["Embarked"].fillna("S", inplace=True)
+    df.drop(columns=["Embarked"], inplace=True)
+    
