@@ -15,3 +15,5 @@ data = pd.read_csv("tested.csv")
 data.info()
 print(data.isnull().sum())
 
+def preprocess_data(df):
+    df.drop(columns=["PassengerId", "Name", "Ticket", "Cabin"], inplace=True)
