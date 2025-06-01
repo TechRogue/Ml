@@ -20,3 +20,5 @@ def preprocess_data(df):
     df["Embarked"].fillna("S", inplace=True)
     df.drop(columns=["Embarked"], inplace=True)
     
+    #convert gender into 1,0
+    df['Sex'] =  df['Sex'].map({'male':1, "female":0})
