@@ -1,24 +1,22 @@
-import pandas as pd 
-import numpy as np 
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 
-#Splits your dataset into training and testing parts.
-from sklearn.model_selection import train_test_split, GridSearchCV
+# Load dataset
+data = load_iris()
+X = data.data
+y = data.target
 
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score, confusion_matrix
+# Split into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-import matplotlib.pyplot as pit 
-import seaborn as sns 
+# Train a model
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
 
-data = pd.read_csv("tested.csv")
-data.info()
-print(data.isnull().sum())
+# Make predictions
+y_pred = model.predict(X_test)
 
-def preprocess_data(df):
-    df.drop(columns=["PassengerId", "Name", "Ticket", "Cabin"], inplace=True)
-    df["Embarked"].fillna("S", inplace=True)
-    df.drop(columns=["Embarked"], inplace=True)
-    
-    #convert gender into 1,0
-    df['Sex'] =  df['Sex'].map({'male':1, "female":0})
+# Check accuracy
+print("Accuracy:", accuracy_score(y_test, y_pred))
